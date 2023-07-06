@@ -37,8 +37,14 @@ def generate_data(args: argparse.Namespace):
     graph_file_path = args.graph_file_path
 
     # read data
-    df = pd.read_hdf(data_file_path)
-    data = np.expand_dims(df.values, axis=-1)
+    # df = pd.read_hdf(data_file_path)
+
+    import pickle
+    import copy
+    from pathlib import Path
+
+    df = pickle.load(Path(data_file_path).open("rb")).astype(dtype="float")
+    data = np.expand_dims(df, axis=-1)
 
     data = data[..., target_channel]
     print("raw time series shape: {0}".format(data.shape))
@@ -106,18 +112,18 @@ def generate_data(args: argparse.Namespace):
 
 if __name__ == "__main__":
     # sliding window size for generating history sequence and target sequence
-    HISTORY_SEQ_LEN = 10
-    FUTURE_SEQ_LEN = 10
+    HISTORY_SEQ_LEN = 16
+    FUTURE_SEQ_LEN = 5
 
     TRAIN_RATIO = 0.7
     VALID_RATIO = 0.1
     TARGET_CHANNEL = [0]                   # target channel(s)
 
-    DATASET_NAME = "PEMS-BAY"
+    DATASET_NAME = "SWAT"
     TOD = False                  # if add time_of_day feature
     DOW = False                  # if add day_of_week feature
     OUTPUT_DIR = "datasets/" + DATASET_NAME
-    DATA_FILE_PATH = "datasets/raw_data/{0}/{0}.h5".format(DATASET_NAME)
+    DATA_FILE_PATH = "datasets/raw_data/{0}/{0}.pkl".format(DATASET_NAME)
     GRAPH_FILE_PATH = "datasets/raw_data/{0}/adj_{0}.pkl".format(DATASET_NAME)
 
     parser = argparse.ArgumentParser()

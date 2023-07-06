@@ -22,8 +22,10 @@ def parse_args():
     # parser.add_argument("-c", "--cfg", default="step/STEP_PEMS-BAY.py", help="training config")
 
     # parser.add_argument("-c", "--cfg", default="step/TSFormer_PEMS08.py", help="training config")
-    parser.add_argument("-c", "--cfg", default="step/STEP_PEMS08.py", help="training config")
+    # parser.add_argument("-c", "--cfg", default="step/STEP_PEMS08.py", help="training config")
     
+    parser.add_argument("-c", "--cfg", default="step/STEP_SWAT.py", help="training config")
+
     parser.add_argument("--gpus", default="0", help="visible gpus")
     return parser.parse_args()
 

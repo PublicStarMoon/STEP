@@ -17,10 +17,10 @@ from .step_data import ForecastingDataset
 CFG = EasyDict()
 
 # ================= general ================= #
-CFG.DESCRIPTION = "STEP(PEMS-BAY) configuration"
+CFG.DESCRIPTION = "STEP(SWAT) configuration"
 CFG.RUNNER = STEPRunner
 CFG.DATASET_CLS = ForecastingDataset
-CFG.DATASET_NAME = "PEMS-BAY"
+CFG.DATASET_NAME = "SWAT"
 CFG.DATASET_TYPE = "Traffic speed"
 CFG.DATASET_INPUT_LEN = 12
 CFG.DATASET_OUTPUT_LEN = 12
@@ -41,7 +41,7 @@ CFG.MODEL.NAME = "STEP"
 CFG.MODEL.ARCH = STEP
 CFG.MODEL.PARAM = {
     "dataset_name": CFG.DATASET_NAME,
-    "pre_trained_tsformer_path": "tsformer_ckpt/TSFormer_PEMS-BAY.pt",
+    "pre_trained_tsformer_path": "tsformer_ckpt/TSFormer_SWAT.pt",
     "tsformer_args": {
                     "patch_size":12,
                     "in_channel":1,
@@ -56,13 +56,13 @@ CFG.MODEL.PARAM = {
                     "mode":"forecasting"
     },
     "backend_args": {
-                    "num_nodes" : 325,
+                    "num_nodes" : 51,
                     "support_len" : 2,
                     "dropout"   : 0.3,
                     "gcn_bool"  : True,
                     "addaptadj" : True,
                     "aptinit"   : None,
-                    "in_dim"    : 2,
+                    "in_dim"    : 1,
                     "out_dim"   : 12,
                     "residual_channels" : 32,
                     "dilation_channels" : 32,
@@ -79,7 +79,7 @@ CFG.MODEL.PARAM = {
                 "output_seq_len": CFG.DATASET_OUTPUT_LEN
     }
 }
-CFG.MODEL.FORWARD_FEATURES = [0, 1, 2]
+CFG.MODEL.FORWARD_FEATURES = [0]
 CFG.MODEL.TARGET_FEATURES = [0]
 CFG.MODEL.DDP_FIND_UNUSED_PARAMETERS = True
 

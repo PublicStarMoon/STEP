@@ -112,8 +112,8 @@ def generate_data(args: argparse.Namespace):
 
 if __name__ == "__main__":
     # sliding window size for generating history sequence and target sequence
-    HISTORY_SEQ_LEN = 16
-    FUTURE_SEQ_LEN = 5
+    HISTORY_SEQ_LEN = 12
+    FUTURE_SEQ_LEN = 12
 
     TRAIN_RATIO = 0.7
     VALID_RATIO = 0.1
